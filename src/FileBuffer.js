@@ -11,7 +11,6 @@ module.exports = class FileBuffer
         this.queue = [[], []];
         this.currentQueueIndex = 0;
         this.processQueueIndex = 1;
-        
     }
 
     listen()
@@ -23,7 +22,7 @@ module.exports = class FileBuffer
         this.stream = fs.createWriteStream(
             this.folder + '/output.jsonline', {flags: 'a', autoClose: false}
         );
-        // This is here incase any errors occur
+        // This is here in case any errors occur
         this.stream.on('error', function (err) {
             console.log(err);
         });
@@ -48,6 +47,8 @@ module.exports = class FileBuffer
             );
             // debug
             console.log(`Lines written: ${this.queue[this.processQueueIndex].length}`);
+            let used = process.memoryUsage().heapUsed / 1024 / 1024;
+            console.log(`The script uses approximately ${Math.round(used * 100) / 100} MB`);
             // empty queue
             this.queue[this.processQueueIndex] = [];
         }
