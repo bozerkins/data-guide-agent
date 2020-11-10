@@ -1,10 +1,16 @@
-const fs = require('fs');
+// const FileTailer = require('./src/receiver/FileTailer');
+// const MySQLPuller = require('./src/receiver/MySQLPuller');
 
-fs.watch(__dirname + '/samples/sample.log', (eventType, filename) => {
-    console.log(`event type is: ${eventType}`);
-    if (filename) {
-      console.log(`filename provided: ${filename}`);
-    } else {
-      console.log('filename not provided');
-    }
-  });
+const HttpListener = require('./src/receiver/HttpListener');
+const Pipeline = require('./src/Pipeline');
+
+// let pipeline = new Pipeline({
+//   name: 'main-pipe'
+// });
+// pipeline.receiveFrom(new HttpListener({
+//   port: 1234
+// }));
+// pipeline.bufferInto(new FileBuffer({
+//    path: __dirname + '/buffer/'
+// }))
+// pipeline.start();

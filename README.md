@@ -10,7 +10,6 @@ Data receivers (push)
 
 Data receivers (pull)
 - Tail file
-- S3 directory
 - MySQL table
 
 Mediators
