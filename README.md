@@ -6,7 +6,7 @@ The core idea behind data guide is to provide data collection and delivery. This
 
 Data receivers (push)
 - HTTP receiver | done
-- TCP receiver
+- TCP receiver | next
 
 Data receivers (pull)
 - Tail file
