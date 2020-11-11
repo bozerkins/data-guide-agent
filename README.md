@@ -5,7 +5,7 @@ The core idea behind data guide is to provide data collection and delivery. This
 # Roadmap
 
 Data receivers (push)
-- HTTP receiver
+- HTTP receiver | done
 - TCP receiver
 
 Data receivers (pull)
@@ -13,17 +13,38 @@ Data receivers (pull)
 - MySQL table
 
 Mediators
-- File Buffer
+- File Buffer | done
 - Metric collector
 
 Data dispatchers (push)
-- File directory
+- File dispatcher | done
 - MySQL table
 - S3 directory
 
 Data dispatchers (pull)
 - Prometheus
 
+# Usage example
+
+```javascript
+const HttpReceiver = require('./src/HttpReceiver');
+const FileBuffer = require('./src/FileBuffer');
+const FileDispatcher = require('./src/FileDispatcher');
+
+// 1. create dispatcher
+const dispatcher = new FileDispatcher(__dirname + '/destination');
+dispatcher.listen();
+
+// 2. create buffer
+const buffer = new FileBuffer(__dirname + '/buffer');
+buffer.dispatchInto(dispatcher.dispatch);
+buffer.listen();
+
+// 3.create receiver
+const receiver = new HttpReceiver({port: 1234});
+receiver.bufferInto(buffer);
+receiver.listen();
+```
 
 # Development
 

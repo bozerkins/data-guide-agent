@@ -1,32 +1,17 @@
-const http = require('http');
-const fs = require('fs');
-const readline = require('readline');
-
+const HttpReceiver = require('./src/HttpReceiver');
 const FileBuffer = require('./src/FileBuffer');
-// create buffer 
-const buffer = new FileBuffer(__dirname);
-// start buffer streams
+const FileDispatcher = require('./src/FileDispatcher');
+
+// 1. create dispatcher
+const dispatcher = new FileDispatcher(__dirname + '/destination');
+dispatcher.listen();
+
+// 2. create buffer
+const buffer = new FileBuffer(__dirname + '/buffer');
+buffer.dispatchInto(dispatcher.dispatch);
 buffer.listen();
 
-const server = http.createServer(
-  (req, res) => {
-
-    const rl = readline.createInterface({
-        input: req,
-        crlfDelay: Infinity
-    });
-
-    rl.on('line', (line) => {
-        // push item to buffer
-        buffer.push(line);
-    });
-
-    // After all the data is saved, respond with a simple html form so they can post more data
-    req.on('end', function () {
-        res.writeHead(200, {"Content-Type":"application/json"});
-        res.end(JSON.stringify({status: 'ok'}));
-    });
-
-  }
-);
-server.listen(1234);
+// 3.create receiver
+const receiver = new HttpReceiver({port: 1234});
+receiver.bufferInto(buffer);
+receiver.listen();
