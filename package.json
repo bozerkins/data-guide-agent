@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/bozerkins/data-guide-agent#readme",
   "dependencies": {
+    "always-tail": "^0.2.0",
     "axios": "^0.21.0",
     "faker": "^5.1.0",
     "uuid": "^8.3.1",

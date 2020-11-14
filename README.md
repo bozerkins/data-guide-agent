@@ -6,11 +6,11 @@ The core idea behind data guide is to provide data collection and delivery. This
 
 Data receivers (push)
 - HTTP receiver | done
-- TCP receiver | next
+- TCP receiver | done
 
 Data receivers (pull)
-- Tail file
-- MySQL table
+- Tail file | done
+- MySQL table | next
 
 Mediators
 - File Buffer | done
